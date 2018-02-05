@@ -1,6 +1,13 @@
 #contenedor {
-    width: 100%;
-    height: 
+    margin: auto;
+    position: relative;
+    width: 75%;
+    height: 800px;
     background-color: rgb(88, 60, 0);
     border-radius: 25px;
+}
+#logoHeader {
+    width: 450px;
+    height: 250px;
+    margin-left: auto;
 }
