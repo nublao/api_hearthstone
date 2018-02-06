@@ -9,44 +9,49 @@
 
 <body>
     <div id="contenedor">
-        <div id="logoHeader"><img id="imagenLogo" src="logo.png" alt="Logo Hearthstone" /></div>
+        <div id="logoHeader"></div>
         <div id="buscador">
-            <span class="fuentePrincipal">Buscador de cartas</span><br/>
-            <select id="selectListaClases">
-                <option value="">Clase</option>
-                <option value="neutral">Neutral</option>
-                <option value="warrior">Guerrero</option>
-                <option value="paladin">Paladín</option>
-                <option value="priest">Sacerdote</option>
-                <option value="warlock">Brujo</option>
-                <option value="rogue">Pícaro</option>
-                <option value="druid">Druida</option>
-                <option value="shaman">Chamán</option>
-                <option value="mage">Mago</option>
-                <option value="hunter">Cazador</option>
-            </select>
-            <select id="selectListaExpansiones">
-                <option value="">Expansión</option>
-                <option value="Naxxramas">Naxxramas</option>
+            <div class="textoPrincipal">Buscador de cartas</div>
+            <div>
+                <input type="text" placeholder="Nombre de la carta..." id="textoNombreCarta">
+                <br/>
+                <select id="selectListaClases" class="listaDesplegable">
+                    <option value="">Clase</option>
+                    <option value="neutral">Neutral</option>
+                    <option value="warrior">Guerrero</option>
+                    <option value="paladin">Paladín</option>
+                    <option value="priest">Sacerdote</option>
+                    <option value="warlock">Brujo</option>
+                    <option value="rogue">Pícaro</option>
+                    <option value="druid">Druida</option>
+                    <option value="shaman">Chamán</option>
+                    <option value="mage">Mago</option>
+                    <option value="hunter">Cazador</option>
+                </select>
+                <select id="selectListaExpansiones" class="listaDesplegable">
+                    <option value="">Expansión</option>
+                    <option value="Naxxramas">Naxxramas</option>
+    
+                </select>
+                <select id="selectListaRareza" class="listaDesplegable">
+                    <option value="">Rareza</option>
+                    <option value="Basic">Básica</option>
+                    <option value="Common">Común</option>
+                    <option value="Uncommon">Poco común</option>
+                    <option value="Epic">Épica</option>
+                    <option value="Legendary">Legendaria</option>
+                </select>
+                <select id="selectListaHabilidad" class="listaDesplegable">
+                    <option value="">Habilidad</option>
+                </select>
+                <select id="selectListaRaza" class="listaDesplegable">
+                    <option value="">Raza</option>
+                </select>
+                <select id="selectListaModo" class="listaDesplegable">
+                    <option value="">Modo</option>
+                </select>
+            </div>
 
-            </select>
-            <select id="selectListaRareza">
-                <option value="">Rareza</option>
-                <option value="Basic">Básica</option>
-                <option value="Common">Común</option>
-                <option value="Uncommon">Poco común</option>
-                <option value="Epic">Épica</option>
-                <option value="Legendary">Legendaria</option>
-            </select>
-            <select id="selectListaHabilidad">
-                <option value="">Habilidad</option>
-            </select>
-            <select id="selectListaRaza">
-                <option value="">Raza</option>
-            </select>
-            <select id="selectListaModo">
-                <option value="">Modo</option>
-            </select>
             <br/>
             <input type="button" name="" id="botonBuscar" class="inputBotonBuscar" value="Buscar">
         </div>
