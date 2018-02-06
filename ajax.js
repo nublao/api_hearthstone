@@ -7,8 +7,15 @@ var habilidad = '';
 var raza = '';
 var modo = '';
 
+// Otras variables
+var jsonTerminado = false;
+
 
 function obtenerJson() {
+  jsonTerminado = false;
+  if(!jsonTerminado) {
+    buscar.value = 'Buscando...';
+  }
   // Obtener la instancia del objeto XMLHttpRequest
   if (window.XMLHttpRequest) {
     peticionHttp = new XMLHttpRequest();
@@ -37,6 +44,10 @@ function obtenerJson() {
               crearCarta(objeto[j]);
             }
           }
+        }
+        jsonTerminado = true;
+        if(jsonTerminado) {
+          buscar.value = 'Buscar';
         }
       }
     }
