@@ -22,15 +22,15 @@ body {
 
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
-    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: rgb(189, 189, 189);
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: rgb(58, 58, 58);
 }
 
 #contenedor {
@@ -38,6 +38,7 @@ body {
     margin: auto;
     position: relative;
     width: 75%;
+    height: 8000px;
     background-color: rgb(88, 60, 0);
     border-radius: 25px;
     box-shadow: 7px 7px #222222;
@@ -55,11 +56,12 @@ body {
 
 #logoHeader {
     margin: auto;
-    width: 450px;
-    height: 150px;
+    width: 500px;
+    height: 200px;
     position: relative;
-    background-color: red;
     background-image: url('logo.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
 #buscador {
