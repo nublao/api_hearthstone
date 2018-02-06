@@ -142,14 +142,14 @@ function crearCarta(objeto) {
   }
 
   // Añadimos los datos del json al html
-  coste.innerHTML = 'Coste: ' + objeto.cost;
+  coste.innerHTML = 'Coste: ' + objeto.cost + '<img src="coste.png"/>';
   coste.className = 'textoGeneral';
   if(objeto.flavor != undefined) {
     flavor.innerHTML = '"' + objeto.flavor + '"';
     flavor.className = 'flavor';
   }
   if(objeto.health != undefined) {
-    ataqueVida.innerHTML = 'Ataque/Vida: ' + objeto.attack + '/' + objeto.health;
+    ataqueVida.innerHTML = 'Ataque/Vida: ' + objeto.attack + '<img src="ataque.png"/>' + objeto.health + '<img src="vida.png"/>';
     ataqueVida.className = 'textoGeneral';
   }
 
