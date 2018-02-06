@@ -1,5 +1,5 @@
 // Variables de control de selección
-var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=10&health=10';
+var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=6';
 var clase = '';
 var expansion = '';
 var rareza = '';
@@ -28,7 +28,6 @@ function obtenerJson() {
         var respuesta = peticionHttp.responseText;
         objetoJson = eval("(" + respuesta + ")");
         // Cogemos el tamaño del json para recorrerlo
-        objetoJson[0]
         for (i in objetoJson) {
           //console.log(objetoJson[i]);
           objeto = objetoJson[i];
@@ -55,25 +54,45 @@ function crearCarta(objeto) {
   var imagen = document.createElement('img');
   var carta = document.createElement('div');
   
+  // Creamos la imagen de la carta y su versión doradas
   carta.className = 'gridCarta';
   imagen.className = 'imagenCarta';
-
   imagen.src = objeto.img;
+  imagen.onmouseover = objeto.imgGold;
   carta.appendChild(imagen);
   contenedor.appendChild(carta);
 
-
+  // Creamos los div para los distintos textos
   var textoCarta = document.createElement('div');
   var nombre = document.createElement('div');
   var ataqueVida = document.createElement('div');
+  var flavor = document.createElement('div');
   // Comprobar la rareza de la carta
-  if(objeto.rarity == 'Legendary') {
+  switch(objeto.rarity) {
+    case 'Legendary':
     nombre.className = 'legendaria';
+    break;
+    case 'Epic':
+    nombre.className = 'epica';
+    break;
+    case 'Rare':
+    nombre.className = 'pocoComun';
+    break;
+    case 'Common':
+    nombre.className = 'comun';
+    break;
+    case 'Free':
+    nombre.className = 'basica';
+    break;
   }
   nombre.innerHTML = objeto.name;
+  flavor.innerHTML = objeto.flavor;
+  flavor.className = 'flavor';
   ataqueVida.innerHTML = objeto.attack + '/' + objeto.health;
+
   textoCarta.appendChild(nombre);
   textoCarta.appendChild(ataqueVida);
+  textoCarta.appendChild(flavor);
 
   textoCarta.className = 'textoCarta';
   carta.appendChild(textoCarta);
