@@ -1,5 +1,5 @@
 // Variables de control de selección
-var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=9';
+var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=0';
 var clase = '';
 var expansion = '';
 var rareza = '';
@@ -9,7 +9,6 @@ var modo = '';
 
 // Otras variables
 var jsonTerminado = false;
-
 
 function obtenerJson() {
   jsonTerminado = false;
@@ -62,6 +61,7 @@ function comprobarCampos() {
 }
 
 function crearCarta(objeto) {
+  // Creamos los div para las imágenes de las cartas
   var imagen = document.createElement('img');
   var carta = document.createElement('div');
   var marco = document.createElement('div');
@@ -70,7 +70,7 @@ function crearCarta(objeto) {
   carta.className = 'gridCarta';
   imagen.className = 'imagenCarta';
   imagen.src = objeto.img;
-  imagen.onmouseover = objeto.imgGold;
+  imagen.onmouseover = mostrarCartaDorada;
   carta.appendChild(imagen);
   contenedor.appendChild(carta);
 
@@ -81,50 +81,98 @@ function crearCarta(objeto) {
   var flavor = document.createElement('div');
   var coste = document.createElement('div');
   var rareza = document.createElement('div');
-  // Comprobar la rareza de la carta
+  var rarezaConcreta = document.createElement('span');
+  var tipo = document.createElement('div');
+  var tipoConcreto = document.createElement('span');
+  // Comprobar la rareza de la carta y asignamos colores
+  if(objeto.rarity != undefined) {
+    rareza.className = 'textoGeneral';
+    rareza.innerHTML = 'Rareza: ';
+  }
+  nombre.innerHTML = objeto.name;
   nombre.className = 'textoNombreCarta';
-  rareza.className = 'textoGeneral';
-  rareza.innerHTML = 'Rareza: ';
+  
   switch(objeto.rarity) {
     case 'Legendary':
     nombre.className += ' legendaria';
-    rareza.innerHTML += 'Legendaria';
+    rarezaConcreta.className = 'legendaria';
+    rarezaConcreta.innerHTML += 'Legendaria';
     break;
     case 'Epic':
     nombre.className += ' epica';
-    rareza.innerHTML += 'Épica';
+    rarezaConcreta.className = 'epica';
+    rarezaConcreta.innerHTML += 'Épica';
     break;
     case 'Rare':
     nombre.className += ' pocoComun';
-    rareza.innerHTML += 'Poco común';
+    rarezaConcreta.className = 'pocoComun';
+    rarezaConcreta.innerHTML += 'Poco común';
     break;
     case 'Common':
     nombre.className += ' comun';
-    rareza.innerHTML += 'Común';
+    rarezaConcreta.className = 'comun';
+    rarezaConcreta.innerHTML += 'Común';
     break;
     case 'Free':
     nombre.className += ' basica';
-    rareza.innerHTML += 'Básica';
+    rarezaConcreta.className = 'basica';
+    rarezaConcreta.innerHTML += 'Básica';
     break;
   }
-  nombre.innerHTML = objeto.name;
+
+  // Comprobar el tipo de carta
+  tipo.className = 'textoGeneral';
+  tipo.innerHTML = 'Tipo: ';
+  switch(objeto.type) {
+    case 'Spell':
+    tipoConcreto.innerHTML += 'Hechizo';
+    break;
+    case 'Hero':
+    tipoConcreto.innerHTML += 'Héroe';
+    break;
+    case 'Weapon':
+    tipoConcreto.innerHTML += 'Arma';
+    break;
+    case 'Minion':
+    tipoConcreto.innerHTML += 'Esbirro';
+    break;
+    case 'Hero Power':
+    tipoConcreto.innerHTML += 'Poder de héroe';
+    break;
+  }
+
+  // Añadimos los datos del json al html
   coste.innerHTML = 'Coste: ' + objeto.cost;
-  flavor.innerHTML = '"' + objeto.flavor + '"';
-  flavor.className = 'flavor';
-  ataqueVida.innerHTML = 'Ataque/Vida: ' + objeto.attack + '/' + objeto.health;
-  ataqueVida.className = 'textoGeneral';
   coste.className = 'textoGeneral';
+  if(objeto.flavor != undefined) {
+    flavor.innerHTML = '"' + objeto.flavor + '"';
+    flavor.className = 'flavor';
+  }
+  if(objeto.health != undefined) {
+    ataqueVida.innerHTML = 'Ataque/Vida: ' + objeto.attack + '/' + objeto.health;
+    ataqueVida.className = 'textoGeneral';
+  }
 
   // Orden de aparición
   textoCarta.appendChild(nombre);
+  tipo.appendChild(tipoConcreto);
+  textoCarta.appendChild(tipo);
   textoCarta.appendChild(coste);
+  rareza.appendChild(rarezaConcreta);
   textoCarta.appendChild(rareza);
   textoCarta.appendChild(ataqueVida);
   textoCarta.appendChild(flavor);
   
-
+  // Grid de cada carta
   textoCarta.className = 'textoCarta';
   carta.appendChild(textoCarta);
+}
+
+// Hover con la carta en versión dorada TODO
+function mostrarCartaDorada() {
+  var imagenDorada = document.createElement('img');
+  imagenDorada.className = 'cartaDorada';
+
 }
 
 window.onload = function() {
