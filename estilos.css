@@ -21,11 +21,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #f1f1f1c9;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgb(189, 189, 189);
+    background: rgb(148, 148, 148);
     border-radius: 25px;
 }
 
@@ -74,11 +74,12 @@ body {
     margin-bottom: 25px;
 }
 
-#textoNombreCarta {
+#buscarNombreCarta {
     border: solid 1px black;
     margin: 5px;
-    padding: 5px;
+    padding: 7px;
     width: 200px;
+    border-radius: 15px;
 }
 
 .listaDesplegable {
@@ -134,8 +135,8 @@ body {
 }
 
 .imagenCarta {
-    width: 25%;
-    height: 25%;
+    width: 307px;
+    height: 465px;
 }
 
 .gridCarta {
@@ -146,9 +147,18 @@ body {
 }
 
 .textoCarta {
-    width: 50%;
+    width: 60%;
     background-color: rgba(141, 141, 141, 0.493);
     float: right;
+    margin-top: 100px;
+    margin-right: 25px;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.textoNombreCarta {
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
 .legendaria {
@@ -161,4 +171,23 @@ body {
 
 .pocoComun {
     color: #35a4fa;
+}
+
+.comun {
+    color: white;
+}
+
+.basica {
+    color: rgb(160, 160, 160);
+}
+
+.flavor {
+    color: #cfc42a;
+    font-style: italic;
+    margin-top: 25px;
+}
+
+.textoAtaqueVida {
+    font-size: 15px;
+    color: white;
 }
