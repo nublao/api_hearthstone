@@ -74,11 +74,12 @@ body {
     margin-bottom: 25px;
 }
 
-#textoNombreCarta {
+#buscarNombreCarta {
     border: solid 1px black;
     margin: 5px;
-    padding: 5px;
+    padding: 7px;
     width: 200px;
+    border-radius: 15px;
 }
 
 .listaDesplegable {
@@ -152,6 +153,12 @@ body {
     margin-top: 100px;
     margin-right: 25px;
     padding: 10px;
+    font-size: 15px;
+}
+
+.textoNombreCarta {
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
 .legendaria {
@@ -178,4 +185,9 @@ body {
     color: #cfc42a;
     font-style: italic;
     margin-top: 25px;
+}
+
+.textoAtaqueVida {
+    font-size: 15px;
+    color: white;
 }

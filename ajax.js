@@ -79,27 +79,29 @@ function crearCarta(objeto) {
   var ataqueVida = document.createElement('div');
   var flavor = document.createElement('div');
   // Comprobar la rareza de la carta
+  nombre.className = 'textoNombreCarta';
   switch(objeto.rarity) {
     case 'Legendary':
-    nombre.className = 'legendaria';
+    nombre.className += ' legendaria';
     break;
     case 'Epic':
-    nombre.className = 'epica';
+    nombre.className += ' epica';
     break;
     case 'Rare':
-    nombre.className = 'pocoComun';
+    nombre.className += ' pocoComun';
     break;
     case 'Common':
-    nombre.className = 'comun';
+    nombre.className += ' comun';
     break;
     case 'Free':
-    nombre.className = 'basica';
+    nombre.className += ' basica';
     break;
   }
   nombre.innerHTML = objeto.name;
-  flavor.innerHTML = objeto.flavor;
+  flavor.innerHTML = '"' + objeto.flavor + '"';
   flavor.className = 'flavor';
   ataqueVida.innerHTML = objeto.attack + '/' + objeto.health;
+  ataqueVida.className = 'textoAtaqueVida';
 
   textoCarta.appendChild(nombre);
   textoCarta.appendChild(ataqueVida);
