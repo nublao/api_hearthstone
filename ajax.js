@@ -34,7 +34,7 @@ function obtenerJson() {
           objeto = objetoJson[i];
           for (j in objeto) {
             if(objeto[j].img != null) {
-              //console.log(objeto[j]);
+              console.log(objeto[j]);
               crearCarta(objeto[j]);
             }
           }
@@ -54,17 +54,30 @@ function comprobarCampos() {
 function crearCarta(objeto) {
   var imagen = document.createElement('img');
   var carta = document.createElement('div');
+  
   carta.className = 'gridCarta';
+  imagen.className = 'imagenCarta';
 
   imagen.src = objeto.img;
-  imagen.className = 'imagenCarta';
   carta.appendChild(imagen);
-
-  carta.innerHTML += objeto.name + '<br/>';
-  carta.innerHTML += objeto.rarity;
   contenedor.appendChild(carta);
-}
 
+
+  var textoCarta = document.createElement('div');
+  var nombre = document.createElement('div');
+  var ataqueVida = document.createElement('div');
+  // Comprobar la rareza de la carta
+  if(objeto.rarity == 'Legendary') {
+    nombre.className = 'legendaria';
+  }
+  nombre.innerHTML = objeto.name;
+  ataqueVida.innerHTML = objeto.attack + '/' + objeto.health;
+  textoCarta.appendChild(nombre);
+  textoCarta.appendChild(ataqueVida);
+
+  textoCarta.className = 'textoCarta';
+  carta.appendChild(textoCarta);
+}
 
 window.onload = function() {
   contenedor = document.getElementById('contenedor');

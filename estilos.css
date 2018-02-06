@@ -144,6 +144,13 @@ body {
     border-radius: 25px;
     margin-bottom: 5px;
 }
+
+.textoCarta {
+    width: 50%;
+    background-color: rgba(141, 141, 141, 0.493);
+    float: right;
+}
+
 .legendaria {
     color: #fea910;
 }
