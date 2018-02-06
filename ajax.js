@@ -1,5 +1,5 @@
 // Variables de control de selección
-var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=6';
+var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=9';
 var clase = '';
 var expansion = '';
 var rareza = '';
@@ -64,6 +64,7 @@ function comprobarCampos() {
 function crearCarta(objeto) {
   var imagen = document.createElement('img');
   var carta = document.createElement('div');
+  var marco = document.createElement('div');
   
   // Creamos la imagen de la carta y su versión doradas
   carta.className = 'gridCarta';
@@ -78,34 +79,49 @@ function crearCarta(objeto) {
   var nombre = document.createElement('div');
   var ataqueVida = document.createElement('div');
   var flavor = document.createElement('div');
+  var coste = document.createElement('div');
+  var rareza = document.createElement('div');
   // Comprobar la rareza de la carta
   nombre.className = 'textoNombreCarta';
+  rareza.className = 'textoGeneral';
+  rareza.innerHTML = 'Rareza: ';
   switch(objeto.rarity) {
     case 'Legendary':
     nombre.className += ' legendaria';
+    rareza.innerHTML += 'Legendaria';
     break;
     case 'Epic':
     nombre.className += ' epica';
+    rareza.innerHTML += 'Épica';
     break;
     case 'Rare':
     nombre.className += ' pocoComun';
+    rareza.innerHTML += 'Poco común';
     break;
     case 'Common':
     nombre.className += ' comun';
+    rareza.innerHTML += 'Común';
     break;
     case 'Free':
     nombre.className += ' basica';
+    rareza.innerHTML += 'Básica';
     break;
   }
   nombre.innerHTML = objeto.name;
+  coste.innerHTML = 'Coste: ' + objeto.cost;
   flavor.innerHTML = '"' + objeto.flavor + '"';
   flavor.className = 'flavor';
-  ataqueVida.innerHTML = objeto.attack + '/' + objeto.health;
-  ataqueVida.className = 'textoAtaqueVida';
+  ataqueVida.innerHTML = 'Ataque/Vida: ' + objeto.attack + '/' + objeto.health;
+  ataqueVida.className = 'textoGeneral';
+  coste.className = 'textoGeneral';
 
+  // Orden de aparición
   textoCarta.appendChild(nombre);
+  textoCarta.appendChild(coste);
+  textoCarta.appendChild(rareza);
   textoCarta.appendChild(ataqueVida);
   textoCarta.appendChild(flavor);
+  
 
   textoCarta.className = 'textoCarta';
   carta.appendChild(textoCarta);
