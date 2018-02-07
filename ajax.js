@@ -10,7 +10,7 @@ var modo = '';
 // Otras variables
 var jsonTerminado = false;
 
-function obtenerJson() {
+function obtenerTodasCartas(funcion) {
   jsonTerminado = false;
   if(!jsonTerminado) {
     buscar.value = 'Buscando...';
@@ -21,13 +21,13 @@ function obtenerJson() {
     peticionHttp = new ActiveXObject("Microsoft.XMLHTTP");
   }
   // Preparar la funcion de respuesta
-  peticionHttp.onreadystatechange = obtenerTodasCartas;
+  peticionHttp.onreadystatechange = mostrarTodasCartas;
   // Realizar peticion HTTP
   peticionHttp.open('GET', URLbasica, true);
   peticionHttp.setRequestHeader("X-Mashape-Key", "GeBGm3vFtjmshBynOo5sk35SbMOIp1dwKCljsnNmOwPjk71p9Y");
   peticionHttp.send(null);
 
-  function obtenerTodasCartas() {
+  function mostrarTodasCartas() {
     if (peticionHttp.readyState == 4) {
       if (peticionHttp.status == 200) {
         var respuesta = peticionHttp.responseText;
@@ -54,10 +54,10 @@ function obtenerJson() {
 
 function comprobarCampos() {
   if(clase != '') {
-
+    URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=2';
   }
   else {
-    obtenerTodasCartas();
+    mostrarTodasCartas();
   }
 
 }
@@ -198,6 +198,6 @@ window.onload = function() {
 
   // Botón de buscar
   buscar = document.getElementById('botonBuscar');
-  buscar.onclick = obtenerJson;
+  buscar.onclick = obtenerTodasCartas;
 }
 
