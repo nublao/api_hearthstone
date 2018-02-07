@@ -1,5 +1,5 @@
 // Variables de control de selección
-var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=0';
+var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=2';
 var clase = '';
 var expansion = '';
 var rareza = '';
@@ -15,27 +15,26 @@ function obtenerJson() {
   if(!jsonTerminado) {
     buscar.value = 'Buscando...';
   }
-  // Obtener la instancia del objeto XMLHttpRequest
   if (window.XMLHttpRequest) {
     peticionHttp = new XMLHttpRequest();
   } else if (window.ActiveXObject) {
     peticionHttp = new ActiveXObject("Microsoft.XMLHTTP");
   }
   // Preparar la funcion de respuesta
-  peticionHttp.onreadystatechange = obtenerCartas;
+  peticionHttp.onreadystatechange = obtenerTodasCartas;
   // Realizar peticion HTTP
   peticionHttp.open('GET', URLbasica, true);
   peticionHttp.setRequestHeader("X-Mashape-Key", "GeBGm3vFtjmshBynOo5sk35SbMOIp1dwKCljsnNmOwPjk71p9Y");
   peticionHttp.send(null);
 
-  function obtenerCartas() {
+  function obtenerTodasCartas() {
     if (peticionHttp.readyState == 4) {
       if (peticionHttp.status == 200) {
         var respuesta = peticionHttp.responseText;
         objetoJson = eval("(" + respuesta + ")");
-        // Cogemos el tamaño del json para recorrerlo
+        // Recorremos primer nivel del json
         for (i in objetoJson) {
-          //console.log(objetoJson[i]);
+          // Recorremos segundo nivel del json y sacamos lo que nos interesa
           objeto = objetoJson[i];
           for (j in objeto) {
             if(objeto[j].img != null) {
@@ -56,6 +55,9 @@ function obtenerJson() {
 function comprobarCampos() {
   if(clase != '') {
 
+  }
+  else {
+    obtenerTodasCartas();
   }
 
 }
@@ -84,6 +86,8 @@ function crearCarta(objeto) {
   var rarezaConcreta = document.createElement('span');
   var tipo = document.createElement('div');
   var tipoConcreto = document.createElement('span');
+  var descripcion = document.createElement('div');
+
   // Comprobar la rareza de la carta y asignamos colores
   if(objeto.rarity != undefined) {
     rareza.className = 'textoGeneral';
@@ -144,6 +148,9 @@ function crearCarta(objeto) {
   // Añadimos los datos del json al html
   coste.innerHTML = 'Coste: ' + objeto.cost + '<img src="coste.png"/>';
   coste.className = 'textoGeneral';
+  descripcion.innerHTML = objeto.text;
+  descripcion.className = 'textoGeneral';
+  descripcion.className += ' descripcion';
   if(objeto.flavor != undefined) {
     flavor.innerHTML = '"' + objeto.flavor + '"';
     flavor.className = 'flavor';
@@ -155,6 +162,7 @@ function crearCarta(objeto) {
 
   // Orden de aparición
   textoCarta.appendChild(nombre);
+  textoCarta.appendChild(descripcion);
   tipo.appendChild(tipoConcreto);
   textoCarta.appendChild(tipo);
   textoCarta.appendChild(coste);
@@ -176,8 +184,10 @@ function mostrarCartaDorada() {
 }
 
 window.onload = function() {
+  // Id del contenedor
   contenedor = document.getElementById('contenedor');
 
+  // Textbox y listas desplegables
   nombreCarta = document.getElementById('textoNombreCarta');
   listaClase = document.getElementById('selectListaClases');
   listaExpansiones = document.getElementById('selectListaExpansiones');
@@ -186,6 +196,7 @@ window.onload = function() {
   listaRaza = document.getElementById('selectListaRaza');
   listaModo = document.getElementById('selectListaModo');
 
+  // Botón de buscar
   buscar = document.getElementById('botonBuscar');
   buscar.onclick = obtenerJson;
 }
