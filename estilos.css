@@ -112,6 +112,10 @@ li a:hover {
     margin: 5px;
 }
 
+#iconoDruid {
+    background-image: url('druid.png');
+}
+
 #iconoHunter {
     background-image: url('hunter.png');
 }
