@@ -8,11 +8,34 @@
 * {
     font-family: Hearthstone;
 }
+/* Estilos generales de etiquetas */
 
 body {
     background-color: gray;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111111;
+}
 
 /* Scrollbar */
 
@@ -32,6 +55,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(95, 95, 95);
 }
+
+/* Capa contenedora */
 
 #contenedor {
     min-width: 800px;
@@ -58,6 +83,8 @@ body {
     background-repeat: no-repeat;
 }
 
+/* Sección del buscador */
+
 #buscador {
     margin: auto;
     background-color: rgba(0, 106, 206, 0.55);
@@ -71,10 +98,45 @@ body {
     border: solid 1px;
 }
 
-/* Rangos para coste, ataque y vida */
+/* Iconos de clase */
 
+.clasesHearthstone {
+    width: 128px;
+    height: 128px;
+    background-repeat: no-repeat;
+}
 
+#iconoHunter {
+    background-image: url('hunter.png');
+}
 
+#iconoMage {
+    background-image: url('mage.png');
+}
+
+#iconoPaladin {
+    background-image: url('paladin.png');
+}
+
+#iconoPriest {
+    background-image: url('priest.png');
+}
+
+#iconoRogue {
+    background-image: url('rogue.png');
+}
+
+#iconoShaman {
+    background-image: url('shaman.png');
+}
+
+#iconoWarlock {
+    background-image: url('warlock.png');
+}
+
+#iconoWarrior {
+    background-image: url('warrior.png');
+}
 
 #buscarNombreCarta {
     border: solid 1px black;
@@ -130,10 +192,14 @@ body {
     top: 1px;
 }
 
+/* Estilo de textos principal */
+
 .textoPrincipal {
     color: lightgray;
     font-size: 50px;
 }
+
+/* Propiedades de las cartas */
 
 .imagenCarta {
     width: 247px;
@@ -151,6 +217,8 @@ body {
     margin-bottom: 5px;
     border: solid 1px;
 }
+
+/* Propiedades del texto que acompaña cada carta */
 
 .textoCarta {
     width: 55%;
