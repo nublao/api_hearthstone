@@ -1,5 +1,5 @@
 // Variables de control de selección
-var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=2';
+var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=5';
 var clase = '';
 var expansion = '';
 var rareza = '';

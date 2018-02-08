@@ -71,6 +71,11 @@ body {
     border: solid 1px;
 }
 
+/* Rangos para coste, ataque y vida */
+
+
+
+
 #buscarNombreCarta {
     border: solid 1px black;
     margin: 5px;
@@ -131,8 +136,12 @@ body {
 }
 
 .imagenCarta {
-    width: 307px;
-    height: 465px;
+    width: 247px;
+    height: 375px;
+    transition: transform .3s;
+}
+.imagenCarta:hover {
+    transform: scale(1.07);
 }
 
 .gridCarta {
