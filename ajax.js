@@ -1,5 +1,5 @@
 // Variables de control de selección
-var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=2';
+var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=5';
 var clase = '';
 var expansion = '';
 var rareza = '';
@@ -10,7 +10,7 @@ var modo = '';
 // Otras variables
 var jsonTerminado = false;
 
-function obtenerJson() {
+function obtenerTodasCartas(funcion) {
   jsonTerminado = false;
   if(!jsonTerminado) {
     buscar.value = 'Buscando...';
@@ -21,13 +21,13 @@ function obtenerJson() {
     peticionHttp = new ActiveXObject("Microsoft.XMLHTTP");
   }
   // Preparar la funcion de respuesta
-  peticionHttp.onreadystatechange = obtenerTodasCartas;
+  peticionHttp.onreadystatechange = mostrarTodasCartas;
   // Realizar peticion HTTP
   peticionHttp.open('GET', URLbasica, true);
   peticionHttp.setRequestHeader("X-Mashape-Key", "GeBGm3vFtjmshBynOo5sk35SbMOIp1dwKCljsnNmOwPjk71p9Y");
   peticionHttp.send(null);
 
-  function obtenerTodasCartas() {
+  function mostrarTodasCartas() {
     if (peticionHttp.readyState == 4) {
       if (peticionHttp.status == 200) {
         var respuesta = peticionHttp.responseText;
@@ -54,10 +54,10 @@ function obtenerJson() {
 
 function comprobarCampos() {
   if(clase != '') {
-
+    URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=2';
   }
   else {
-    obtenerTodasCartas();
+    mostrarTodasCartas();
   }
 
 }
@@ -67,13 +67,21 @@ function crearCarta(objeto) {
   var imagen = document.createElement('img');
   var carta = document.createElement('div');
   var marco = document.createElement('div');
+  imagenDorada = document.createElement('span');
   
   // Creamos la imagen de la carta y su versión doradas
   carta.className = 'gridCarta';
   imagen.className = 'imagenCarta';
   imagen.src = objeto.img;
-  imagen.onmouseover = mostrarCartaDorada;
+  imagen.onmousemove = function() {
+    mostrarCartaDorada(imagen.id);
+  }
+  imagen.id = objeto.cardId;
+
+  imagenDorada.style.visibility = 'hidden';
+  imagenDorada.src = objeto.imgGold;
   carta.appendChild(imagen);
+  carta.appendChild(imagenDorada);
   contenedor.appendChild(carta);
 
   // Creamos los div para los distintos textos
@@ -176,10 +184,14 @@ function crearCarta(objeto) {
   carta.appendChild(textoCarta);
 }
 
-// Hover con la carta en versión dorada TODO
-function mostrarCartaDorada() {
-  var imagenDorada = document.createElement('img');
-  imagenDorada.className = 'cartaDorada';
+// Hover con la carta en versión dorada
+function mostrarCartaDorada(e) {
+  posX = e.clientX;
+  posY = e.clientY;
+
+  imagenDorada.style.left = posX + '30px';
+  imagenDorada.style.top = posY + '30px';
+  imagenDorada.style.visibility = 'visible';
 
 }
 
@@ -198,6 +210,6 @@ window.onload = function() {
 
   // Botón de buscar
   buscar = document.getElementById('botonBuscar');
-  buscar.onclick = obtenerJson;
+  buscar.onclick = obtenerTodasCartas;
 }
 

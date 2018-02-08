@@ -8,11 +8,33 @@
 * {
     font-family: Hearthstone;
 }
+/* Estilos generales de etiquetas */
 
 body {
     background-color: gray;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #ffffff9a;
+}
 
 /* Scrollbar */
 
@@ -32,6 +54,8 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: rgb(95, 95, 95);
 }
+
+/* Capa contenedora */
 
 #contenedor {
     min-width: 800px;
@@ -58,17 +82,70 @@ body {
     background-repeat: no-repeat;
 }
 
+/* Sección del buscador */
+
 #buscador {
     margin: auto;
     background-color: rgba(0, 106, 206, 0.55);
-    width: 600px;
-    height: 200px;
+    width: 750px;
+    height: 300px;
     border-radius: 25px;
     text-align: center;
     box-shadow: 7px 7px #222222;
     padding: 25px;
     margin-bottom: 25px;
     border: solid 1px;
+}
+
+/* Iconos de clase */
+
+#contenedorClases {
+    margin-left: 10px;
+}
+
+.clasesHearthstone {
+    width: 38px;
+    height: 38px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+#iconoDruid {
+    background-image: url('druid.png');
+}
+
+#iconoHunter {
+    background-image: url('hunter.png');
+}
+
+#iconoMage {
+    background-image: url('mage.png');
+}
+
+#iconoPaladin {
+    background-image: url('paladin.png');
+}
+
+#iconoPriest {
+    background-image: url('priest.png');
+}
+
+#iconoRogue {
+    background-image: url('rogue.png');
+}
+
+#iconoShaman {
+    background-image: url('shaman.png');
+}
+
+#iconoWarlock {
+    background-image: url('warlock.png');
+}
+
+#iconoWarrior {
+    background-image: url('warrior.png');
 }
 
 #buscarNombreCarta {
@@ -125,14 +202,22 @@ body {
     top: 1px;
 }
 
+/* Estilo de textos principal */
+
 .textoPrincipal {
     color: lightgray;
     font-size: 50px;
 }
 
+/* Propiedades de las cartas */
+
 .imagenCarta {
-    width: 307px;
-    height: 465px;
+    width: 247px;
+    height: 375px;
+    transition: transform .3s;
+}
+.imagenCarta:hover {
+    transform: scale(1.07);
 }
 
 .gridCarta {
@@ -142,6 +227,8 @@ body {
     margin-bottom: 5px;
     border: solid 1px;
 }
+
+/* Propiedades del texto que acompaña cada carta */
 
 .textoCarta {
     width: 55%;
