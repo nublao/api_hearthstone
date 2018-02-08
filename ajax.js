@@ -67,13 +67,21 @@ function crearCarta(objeto) {
   var imagen = document.createElement('img');
   var carta = document.createElement('div');
   var marco = document.createElement('div');
+  imagenDorada = document.createElement('span');
   
   // Creamos la imagen de la carta y su versión doradas
   carta.className = 'gridCarta';
   imagen.className = 'imagenCarta';
   imagen.src = objeto.img;
-  imagen.onmouseover = mostrarCartaDorada;
+  imagen.onmousemove = function() {
+    mostrarCartaDorada(imagen.id);
+  }
+  imagen.id = objeto.cardId;
+
+  imagenDorada.style.visibility = 'hidden';
+  imagenDorada.src = objeto.imgGold;
   carta.appendChild(imagen);
+  carta.appendChild(imagenDorada);
   contenedor.appendChild(carta);
 
   // Creamos los div para los distintos textos
@@ -176,10 +184,14 @@ function crearCarta(objeto) {
   carta.appendChild(textoCarta);
 }
 
-// Hover con la carta en versión dorada TODO
-function mostrarCartaDorada() {
-  var imagenDorada = document.createElement('img');
-  imagenDorada.className = 'cartaDorada';
+// Hover con la carta en versión dorada
+function mostrarCartaDorada(e) {
+  posX = e.clientX;
+  posY = e.clientY;
+
+  imagenDorada.style.left = posX + '30px';
+  imagenDorada.style.top = posY + '30px';
+  imagenDorada.style.visibility = 'visible';
 
 }
 
