@@ -2,9 +2,10 @@
 <html>
 
 <head>
-    <title>API Cartas Hearthstone</title>
+    <title>Hearthstone - Buscador de cartas</title>
     <script src="ajax.js" type="text/javascript"></script>
     <link rel="stylesheet" href="estilos.css" />
+    <link rel="icon" href="imagenes/favicon.png">
 </head>
 
 <body>
@@ -12,6 +13,7 @@
         <div id="logoHeader"></div>
         <div id="buscador">
             <div class="textoPrincipal">Buscador de cartas</div>
+            <input type="text" placeholder="Nombre de la carta..." id="buscarNombreCarta">
             <div id="contenedorClases">
                 <ul>
                     <li><a class="clasesHearthstone" id="iconoDruid"></a></li>
@@ -25,8 +27,7 @@
                     <li><a class="clasesHearthstone" id="iconoWarrior"></a></li>
                 </ul>
             </div>
-            <div>
-                <input type="text" placeholder="Nombre de la carta..." id="buscarNombreCarta">
+            <div>     
                 <br/>
                 <select id="selectListaClases" class="listaDesplegable">
                     <option value="">Clase</option>
