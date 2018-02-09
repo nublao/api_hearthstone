@@ -170,10 +170,10 @@ li a:hover {
     box-shadow: inset 0px -3px 24px 0px #29bbff;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #2dabf9), color-stop(1, #0688fa));
     background: -moz-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
-    background: -webkit-linear-gradient(top, #2dabf9 5%, #23537e 100%);
-    background: -o-linear-gradient(top, #2dabf9 5%, #23537e 100%);
+    background: -webkit-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
+    background: -o-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
     background: -ms-linear-gradient(top, #2dabf9 5%, #0688fa 100%);
-    background: linear-gradient(to bottom, #2dabf9 5%, #23537e 100%);
+    background: linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#2dabf9', endColorstr='#0688fa', GradientType=0);
     background-color: #2dabf9;
     -moz-border-radius: 10px;
