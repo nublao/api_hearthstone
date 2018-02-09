@@ -161,9 +161,9 @@ function crearCarta(objeto) {
   // Quitar caracteres que no queremos
   if(objeto.text != undefined) {
     var cadena = objeto.text;
-    var re = new RegExp('\\n');
-    cadena.replace(re, ' ');
-    descripcion.innerHTML = cadena;
+    cadena = cadena.replace('\n', '');
+    a = escape(cadena);
+    descripcion.innerHTML = a;
     descripcion.className = 'textoGeneral';
     descripcion.className += ' descripcion';
   }
