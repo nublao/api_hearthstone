@@ -2,9 +2,10 @@
 <html>
 
 <head>
-    <title>API Cartas Hearthstone</title>
+    <title>Hearthstone - Buscador de cartas</title>
     <script src="ajax.js" type="text/javascript"></script>
     <link rel="stylesheet" href="estilos.css" />
+    <link rel="icon" href="imagenes/favicon.png">
 </head>
 
 <body>
@@ -12,6 +13,7 @@
         <div id="logoHeader"></div>
         <div id="buscador">
             <div class="textoPrincipal">Buscador de cartas</div>
+            <input type="text" placeholder="Nombre de la carta..." id="buscarNombreCarta">
             <div id="contenedorClases">
                 <ul>
                     <li><a class="clasesHearthstone" id="iconoDruid"></a></li>
@@ -25,30 +27,37 @@
                     <li><a class="clasesHearthstone" id="iconoWarrior"></a></li>
                 </ul>
             </div>
-            <div>Por coste</div>
-            <div>Por tipo</div>
-            <div>Por nombre</div>
-            <div>Por rareza</div>
-            <div>
-                <input type="text" placeholder="Nombre de la carta..." id="buscarNombreCarta">
+            <div id="contenedorCostesCarta">
+                <ul>
+                    <li><a class="costesCarta" id="coste1">1</a></li>
+                    <li><a class="costesCarta" id="coste1">2</a></li>
+                    <li><a class="costesCarta" id="coste1">3</a></li>
+                    <li><a class="costesCarta" id="coste1">4</a></li>
+                    <li><a class="costesCarta" id="coste1">5</a></li>
+                    <li><a class="costesCarta" id="coste1">6</a></li>
+                    <li><a class="costesCarta" id="coste1">7</a></li>
+                    <li><a class="costesCarta" id="coste1">8</a></li>
+                    <li><a class="costesCarta" id="coste1">9</a></li>
+                    <li><a class="costesCarta" id="allCostes">Todos</a></li>
+                </ul>
+            </div>
+            <div>     
                 <br/>
-                <select id="selectListaClases" class="listaDesplegable">
-                    <option value="">Clase</option>
-                    <option value="neutral">Neutral</option>
-                    <option value="warrior">Guerrero</option>
-                    <option value="paladin">Paladín</option>
-                    <option value="priest">Sacerdote</option>
-                    <option value="warlock">Brujo</option>
-                    <option value="rogue">Pícaro</option>
-                    <option value="druid">Druida</option>
-                    <option value="shaman">Chamán</option>
-                    <option value="mage">Mago</option>
-                    <option value="hunter">Cazador</option>
-                </select>
                 <select id="selectListaExpansiones" class="listaDesplegable">
-                    <option value="">Expansión</option>
+                    <option value="">Colección de cartas</option>
+                    <option value="Basic">Básico</option>
+                    <option value="Classic">Clásico</option>
+                    <option value="">Dioses Antiguos</option>
+                    <option value="">Karazhan</option>
+                    <option value="">Gadgetzan</option>
+                    <option value="">Un'Goro</option>
+                    <option value="">Trono Helado</option>
+                    <option value="">Kóbolds</option>
                     <option value="Naxxramas">Naxxramas</option>
-    
+                    <option value="">Goblins vs Gnomos</option>
+                    <option value="">Montaña Roca Negra</option>
+                    <option value="">Gran Torneo</option>
+                    <option value="">Liga de Expedicionarios</option>
                 </select>
                 <select id="selectListaRareza" class="listaDesplegable">
                     <option value="">Rareza</option>
@@ -58,14 +67,8 @@
                     <option value="Epic">Épica</option>
                     <option value="Legendary">Legendaria</option>
                 </select>
-                <select id="selectListaHabilidad" class="listaDesplegable">
-                    <option value="">Habilidad</option>
-                </select>
                 <select id="selectListaRaza" class="listaDesplegable">
                     <option value="">Raza</option>
-                </select>
-                <select id="selectListaModo" class="listaDesplegable">
-                    <option value="">Modo</option>
                 </select>
             </div>
 

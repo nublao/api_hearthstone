@@ -154,7 +154,7 @@ function crearCarta(objeto) {
   }
 
   // Añadimos los datos del json al html
-  coste.innerHTML = 'Coste: ' + objeto.cost + '<img src="coste.png"/>';
+  coste.innerHTML = 'Coste: ' + objeto.cost + '<img src="imagenes/coste.png"/>';
   coste.className = 'textoGeneral';
   descripcion.innerHTML = objeto.text;
   descripcion.className = 'textoGeneral';
@@ -164,7 +164,7 @@ function crearCarta(objeto) {
     flavor.className = 'flavor';
   }
   if(objeto.health != undefined) {
-    ataqueVida.innerHTML = 'Ataque/Vida: ' + objeto.attack + '<img src="ataque.png"/>' + objeto.health + '<img src="vida.png"/>';
+    ataqueVida.innerHTML = 'Ataque/Vida: ' + objeto.attack + '<img src="imagenes/ataque.png"/>' + objeto.health + '<img src="imagenes/vida.png"/>';
     ataqueVida.className = 'textoGeneral';
   }
 
