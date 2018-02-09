@@ -162,8 +162,13 @@ function crearCarta(objeto) {
   if(objeto.text != undefined) {
     var cadena = objeto.text;
     cadena = cadena.replace('\n', '');
-    a = escape(cadena);
-    descripcion.innerHTML = a;
+    /*for(i = 0; i < cadena.length - 2; i++) {
+      if(cadena.substring(i, i+2) == '&#92;n') {
+        console.log('entra1');
+        cadena.substring(i, i+2) = ' ';
+      }
+    }*/
+    descripcion.innerHTML = cadena;
     descripcion.className = 'textoGeneral';
     descripcion.className += ' descripcion';
   }
