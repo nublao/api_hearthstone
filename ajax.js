@@ -32,13 +32,14 @@ function obtenerTodasCartas(funcion) {
       if (peticionHttp.status == 200) {
         var respuesta = peticionHttp.responseText;
         objetoJson = eval("(" + respuesta + ")");
+        console.log(objetoJson);
         // Recorremos primer nivel del json
         for (i in objetoJson) {
           // Recorremos segundo nivel del json y sacamos lo que nos interesa
           objeto = objetoJson[i];
           for (j in objeto) {
             if(objeto[j].img != null) {
-              console.log(objeto[j]);
+              //console.log(objeto[j]);
               crearCarta(objeto[j]);
             }
           }
@@ -156,9 +157,16 @@ function crearCarta(objeto) {
   // Añadimos los datos del json al html
   coste.innerHTML = 'Coste: ' + objeto.cost + '<img src="imagenes/coste.png"/>';
   coste.className = 'textoGeneral';
-  descripcion.innerHTML = objeto.text;
-  descripcion.className = 'textoGeneral';
-  descripcion.className += ' descripcion';
+
+  // Quitar caracteres que no queremos
+  if(objeto.text != undefined) {
+    var cadena = objeto.text;
+    var re = new RegExp('\\n');
+    cadena.replace(re, ' ');
+    descripcion.innerHTML = cadena;
+    descripcion.className = 'textoGeneral';
+    descripcion.className += ' descripcion';
+  }
   if(objeto.flavor != undefined) {
     flavor.innerHTML = '"' + objeto.flavor + '"';
     flavor.className = 'flavor';
