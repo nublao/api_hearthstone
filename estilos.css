@@ -86,7 +86,7 @@ li a {
     margin: auto;
     background-color: rgba(0, 106, 206, 0.55);
     width: 750px;
-    height: 300px;
+    height: 325px;
     border-radius: 25px;
     text-align: center;
     box-shadow: 7px 7px #222222;
@@ -158,7 +158,7 @@ li a {
 }
 
 .costesCarta {
-    background-color: rgba(41, 58, 109, 0.596);
+    background-color: rgba(29, 41, 78, 0.596);
     border-radius: 50%;
     width: 15px;
     height: 15px;
@@ -183,7 +183,7 @@ li a {
     border: solid 1px black;
     margin: 5px;
     padding: 7px;
-    width: 200px;
+    width: 250px;
     border-radius: 15px;
     background-color: rgba(203, 205, 207, 0.98);
 }
