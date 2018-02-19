@@ -1,5 +1,5 @@
 // Variables de control de selección
-var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=5';
+var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES';
 var clase = '';
 var expansion = '';
 var rareza = '';
@@ -10,10 +10,11 @@ var modo = '';
 // Otras variables
 var jsonTerminado = false;
 
-function obtenerTodasCartas(funcion) {
+function obtenerTodasCartas() {
   jsonTerminado = false;
   if(!jsonTerminado) {
     buscar.value = 'Buscando...';
+    //buscar.disabled = 'true';
   }
   if (window.XMLHttpRequest) {
     peticionHttp = new XMLHttpRequest();
@@ -23,6 +24,8 @@ function obtenerTodasCartas(funcion) {
   // Preparar la funcion de respuesta
   peticionHttp.onreadystatechange = mostrarTodasCartas;
   // Realizar peticion HTTP
+  quitarCartasAntesDeMostrar();
+  buscarPorCoste(this.id);
   peticionHttp.open('GET', URLbasica, true);
   peticionHttp.setRequestHeader("X-Mashape-Key", "GeBGm3vFtjmshBynOo5sk35SbMOIp1dwKCljsnNmOwPjk71p9Y");
   peticionHttp.send(null);
@@ -53,14 +56,21 @@ function obtenerTodasCartas(funcion) {
   }
 }
 
-function comprobarCampos() {
-  if(clase != '') {
-    URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost=2';
+function quitarCartasAntesDeMostrar() {
+  cartas = document.getElementById('gridTodasCartas');
+  while (cartas.hasChildNodes()) {   
+    cartas.removeChild(cartas.firstChild);
+  }
+}
+
+
+function buscarPorCoste(id) {
+  if(id == 'allCostes' || id == undefined) {
+    URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES';
   }
   else {
-    mostrarTodasCartas();
+    URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost='+ id;
   }
-
 }
 
 function crearCarta(objeto) {
@@ -73,7 +83,12 @@ function crearCarta(objeto) {
   // Creamos la imagen de la carta y su versión doradas
   carta.className = 'gridCarta';
   imagen.className = 'imagenCarta';
-  imagen.src = objeto.img;
+  if(objeto.img != undefined || objeto.img != null) {
+    imagen.src = objeto.img;
+  }
+  else {
+    imagen.src = 'imagenes/404.png';
+  }
   imagen.onmousemove = function() {
     mostrarCartaDorada(imagen.id);
   }
@@ -83,7 +98,7 @@ function crearCarta(objeto) {
   imagenDorada.src = objeto.imgGold;
   carta.appendChild(imagen);
   carta.appendChild(imagenDorada);
-  contenedor.appendChild(carta);
+  gridTodasCartas.appendChild(carta);
 
   // Creamos los div para los distintos textos
   var textoCarta = document.createElement('div');
@@ -161,7 +176,7 @@ function crearCarta(objeto) {
   // Quitar caracteres que no queremos
   if(objeto.text != undefined) {
     var cadena = objeto.text;
-    cadena = cadena.replace('\n', '');
+    cadena = cadena.replace('\n', ' ');
     /*for(i = 0; i < cadena.length - 2; i++) {
       if(cadena.substring(i, i+2) == '&#92;n') {
         console.log('entra1');
@@ -197,6 +212,46 @@ function crearCarta(objeto) {
   carta.appendChild(textoCarta);
 }
 
+function onClickClases() {
+  quitarCartasAntesDeMostrar();
+  URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards/classes/' + this.id + '?locale=esES';
+  jsonTerminado = false;
+  if(!jsonTerminado) {
+    buscar.value = 'Buscando...';
+  }
+  if (window.XMLHttpRequest) {
+    peticionHttp = new XMLHttpRequest();
+  } else if (window.ActiveXObject) {
+    peticionHttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  // Preparar la funcion de respuesta
+  peticionHttp.onreadystatechange = mostrarCartasPorClase;
+  // Realizar peticion HTTP
+  peticionHttp.open('GET', URLbasica, true);
+  peticionHttp.setRequestHeader("X-Mashape-Key", "GeBGm3vFtjmshBynOo5sk35SbMOIp1dwKCljsnNmOwPjk71p9Y");
+  peticionHttp.send(null);
+
+  function mostrarCartasPorClase() {
+    if (peticionHttp.readyState == 4) {
+      if (peticionHttp.status == 200) {
+        var respuesta = peticionHttp.responseText;
+        objetoJson = eval("(" + respuesta + ")");
+        console.log(objetoJson);
+        // Recorremos primer nivel del json
+        for (i in objetoJson) {
+          crearCarta(objetoJson[i]);
+        }
+
+        jsonTerminado = true;
+        if(jsonTerminado) {
+          buscar.value = 'Buscar';
+        }
+      }
+    }
+  }
+
+}
+
 // Hover con la carta en versión dorada
 function mostrarCartaDorada(e) {
   posX = e.clientX;
@@ -208,21 +263,98 @@ function mostrarCartaDorada(e) {
 
 }
 
+function comprobrarBotonBuscar() {
+  var nombreCarta = document.getElementById('buscarNombreCarta');
+  if(nombreCarta.value != '') {
+    buscarPorNombreCarta();
+  }
+  else {
+    mostrarErrorTextoVacio();
+  }
+}
+
+function buscarPorNombreCarta() {
+  var nombreCarta = document.getElementById('buscarNombreCarta');
+  URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards/' + nombreCarta.value + '?locale=esES';
+  quitarCartasAntesDeMostrar();
+  jsonTerminado = false;
+  if(!jsonTerminado) {
+    buscar.value = 'Buscando...';
+  }
+  if (window.XMLHttpRequest) {
+    peticionHttp = new XMLHttpRequest();
+  } else if (window.ActiveXObject) {
+    peticionHttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  // Preparar la funcion de respuesta
+  peticionHttp.onreadystatechange = mostrarCartasPorClase;
+  // Realizar peticion HTTP
+  peticionHttp.open('GET', URLbasica, true);
+  peticionHttp.setRequestHeader("X-Mashape-Key", "GeBGm3vFtjmshBynOo5sk35SbMOIp1dwKCljsnNmOwPjk71p9Y");
+  peticionHttp.send(null);
+
+  function mostrarCartasPorClase() {
+    if (peticionHttp.readyState == 4) {
+      if (peticionHttp.status == 200) {
+        var respuesta = peticionHttp.responseText;
+        objetoJson = eval("(" + respuesta + ")");
+        console.log(objetoJson);
+        // Recorremos primer nivel del json
+        for (i in objetoJson) {
+          crearCarta(objetoJson[i]);
+        }
+        jsonTerminado = true;
+        if(jsonTerminado) {
+          buscar.value = 'Buscar';
+        }
+      }
+    }
+  }
+}
+
 window.onload = function() {
   // Id del contenedor
   contenedor = document.getElementById('contenedor');
 
-  // Textbox y listas desplegables
-  nombreCarta = document.getElementById('textoNombreCarta');
-  listaClase = document.getElementById('selectListaClases');
-  listaExpansiones = document.getElementById('selectListaExpansiones');
-  listaRareza = document.getElementById('selectListaRareza');
-  listaHabilidad = document.getElementById('selectListaHabilidad');
-  listaRaza = document.getElementById('selectListaRaza');
-  listaModo = document.getElementById('selectListaModo');
+  // Listeners de clases
+  document.getElementById("Druid").addEventListener("click", onClickClases);
+  document.getElementById("Hunter").addEventListener("click", onClickClases);
+  document.getElementById("Mage").addEventListener("click", onClickClases);
+  document.getElementById("Paladin").addEventListener("click", onClickClases);
+  document.getElementById("Priest").addEventListener("click", onClickClases);
+  document.getElementById("Rogue").addEventListener("click", onClickClases);
+  document.getElementById("Shaman").addEventListener("click", onClickClases);
+  document.getElementById("Warlock").addEventListener("click", onClickClases);
+  document.getElementById("Warrior").addEventListener("click", onClickClases);
+
+  // Listeners de costes
+
+  document.getElementById("0").addEventListener("click", obtenerTodasCartas);
+  document.getElementById("1").addEventListener("click", obtenerTodasCartas);
+  document.getElementById("2").addEventListener("click", obtenerTodasCartas);
+  document.getElementById("3").addEventListener("click", obtenerTodasCartas);
+  document.getElementById("4").addEventListener("click", obtenerTodasCartas);
+  document.getElementById("5").addEventListener("click", obtenerTodasCartas);
+  document.getElementById("6").addEventListener("click", obtenerTodasCartas);
+  document.getElementById("7").addEventListener("click", obtenerTodasCartas);
+  document.getElementById("8").addEventListener("click", obtenerTodasCartas);
+  document.getElementById("9").addEventListener("click", obtenerTodasCartas);
+  document.getElementById("allCostes").addEventListener("click", obtenerTodasCartas);
+
+
+  // Textbox
+  nombreCarta = document.getElementById('buscarNombreCarta');
+  nombreCarta.addEventListener("keydown", function(e) {
+    if (!e) { var e = window.event; }
+    //e.preventDefault(); // sometimes useful
+
+    // Enter is pressed
+    if (e.keyCode == 13) { comprobrarBotonBuscar(); }
+});
+
 
   // Botón de buscar
   buscar = document.getElementById('botonBuscar');
-  buscar.onclick = obtenerTodasCartas;
+  buscar.onclick = comprobrarBotonBuscar;
 }
 

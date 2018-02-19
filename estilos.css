@@ -115,46 +115,46 @@ li a {
     background-color: #a7a7a79a;
 }
 
-#iconoDruid {
+#Druid {
     background-image: url('imagenes/clases/druid.png');
 }
 
-#iconoHunter {
+#Hunter {
     background-image: url('imagenes/clases/hunter.png');
 }
 
-#iconoMage {
+#Mage {
     background-image: url('imagenes/clases/mage.png');
 }
 
-#iconoPaladin {
+#Paladin {
     background-image: url('imagenes/clases/paladin.png');
 }
 
-#iconoPriest {
+#Priest {
     background-image: url('imagenes/clases/priest.png');
 }
 
-#iconoRogue {
+#Rogue {
     background-image: url('imagenes/clases/rogue.png');
 }
 
-#iconoShaman {
+#Shaman {
     background-image: url('imagenes/clases/shaman.png');
 }
 
-#iconoWarlock {
+#Warlock {
     background-image: url('imagenes/clases/warlock.png');
 }
 
-#iconoWarrior {
+#Warrior {
     background-image: url('imagenes/clases/warrior.png');
 }
 
 /* Contadores de coste */
 
 #contenedorCostesCarta {
-    margin-left: 50px;
+    margin-left: 25px;
 }
 
 .costesCarta {
