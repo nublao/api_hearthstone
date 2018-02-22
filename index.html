@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Hearthstone - Buscador de cartas</title>
     <script src="ajax.js" type="text/javascript"></script>
     <link rel="stylesheet" href="estilos.css" />
     <link rel="icon" href="imagenes/favicon.png">
 </head>
-
 <body>
     <div id="contenedor">
-        <div id="logoHeader"></div>
+        <a href="https://playhearthstone.com/es-es/"><div id="logoHeader"></div></a>
         <div id="buscador">
             <div class="textoPrincipal">Buscador de cartas</div>
-            <input type="text" placeholder="Nombre de la carta..." id="buscarNombreCarta">
+            <input type="text" autofocus placeholder="Nombre de la carta..." id="buscarNombreCarta">
             <div id="contenedorClases">
                 <ul>
                     <li><a class="clasesHearthstone" id="Druid"></a></li>
@@ -44,6 +42,7 @@
             </div>
             <div>     
                 <br/>
+                <!--
                 <select id="selectListaExpansiones" class="listaDesplegable">
                     <option value="">Colección de cartas</option>
                     <option value="Basic">Básico</option>
@@ -68,16 +67,12 @@
                     <option value="Epic">Épica</option>
                     <option value="Legendary">Legendaria</option>
                 </select>
-                <select id="selectListaRaza" class="listaDesplegable">
-                    <option value="">Raza</option>
-                </select>
+            -->
             </div>
-
             <br/>
             <input type="button" name="" id="botonBuscar" class="inputBotonBuscar" value="Buscar">
         </div>
         <div id="gridTodasCartas"></div>
     </div>
 </body>
-
 </html>

@@ -1,11 +1,5 @@
 // Variables de control de selección
 var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES';
-var clase = '';
-var expansion = '';
-var rareza = '';
-var habilidad = '';
-var raza = '';
-var modo = '';
 
 // Otras variables
 var jsonTerminado = false;
@@ -63,7 +57,6 @@ function quitarCartasAntesDeMostrar() {
   }
 }
 
-
 function buscarPorCoste(id) {
   if(id == 'allCostes' || id == undefined) {
     URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES';
@@ -71,6 +64,10 @@ function buscarPorCoste(id) {
   else {
     URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES&cost='+ id;
   }
+}
+
+function imagenInvalida(imagen) {
+  imagen.src = 'imagenes/404.png';
 }
 
 function crearCarta(objeto) {
@@ -83,12 +80,14 @@ function crearCarta(objeto) {
   // Creamos la imagen de la carta y su versión doradas
   carta.className = 'gridCarta';
   imagen.className = 'imagenCarta';
-  if(objeto.img != undefined || objeto.img != null) {
+  imagen.onerror = function() {imagenInvalida(imagen)};
+  if(objeto.img != undefined) {
     imagen.src = objeto.img;
   }
   else {
     imagen.src = 'imagenes/404.png';
   }
+  //imagen.alt = 'imagenes/404.png';
   imagen.onmousemove = function() {
     mostrarCartaDorada(imagen.id);
   }
@@ -111,6 +110,7 @@ function crearCarta(objeto) {
   var tipo = document.createElement('div');
   var tipoConcreto = document.createElement('span');
   var descripcion = document.createElement('div');
+  var expansion = document.createElement('div');
 
   // Comprobar la rareza de la carta y asignamos colores
   if(objeto.rarity != undefined) {
@@ -196,6 +196,52 @@ function crearCarta(objeto) {
     ataqueVida.className = 'textoGeneral';
   }
 
+  // TODO Expansión
+
+  expansion.innerHTML = 'Expansión: ';
+  expansion.className = 'textoGeneral';
+  switch(objeto.cardSet) {
+    case 'Basic':
+    expansion.innerHTML += 'Básico';
+    break;
+    case 'Classic':
+    expansion.innerHTML += 'Clásico';
+    break;
+    case 'Whispers of the Old Gods':
+    expansion.innerHTML += 'Dioses Antiguos';
+    break;
+    case 'One Night in Karazhan':
+    expansion.innerHTML += 'Karazhan';
+    break;
+    case 'Mean Streets of Gadgetzan':
+    expansion.innerHTML += 'Gadgetzan';
+    break;
+    case "Journey to Un'Goro":
+    expansion.innerHTML += "Un'Goro";
+    break;
+    case 'Knights of the Frozen Throne':
+    expansion.innerHTML += 'Trono Helado';
+    break;
+    case 'Kobolds & Catacombs':
+    expansion.innerHTML += 'Kóbolds y Catacumbas';
+    break;
+    case 'Naxxramas':
+    expansion.innerHTML += 'Naxxramas';
+    break;
+    case 'Goblins vs Gnomes':
+    expansion.innerHTML += 'Goblins contra Gnomos';
+    break;
+    case 'Blackrock Mountain':
+    expansion.innerHTML += 'Montaña Roca Negra';
+    break;
+    case 'The Grand Tournament':
+    expansion.innerHTML += 'El Gran Torneo';
+    break;
+    case 'The League of Explorers':
+    expansion.innerHTML += 'Liga de Expedicionarios';
+    break;
+  }
+
   // Orden de aparición
   textoCarta.appendChild(nombre);
   textoCarta.appendChild(descripcion);
@@ -204,6 +250,7 @@ function crearCarta(objeto) {
   textoCarta.appendChild(coste);
   rareza.appendChild(rarezaConcreta);
   textoCarta.appendChild(rareza);
+  textoCarta.appendChild(expansion);
   textoCarta.appendChild(ataqueVida);
   textoCarta.appendChild(flavor);
   
@@ -240,8 +287,8 @@ function onClickClases() {
         // Recorremos primer nivel del json
         for (i in objetoJson) {
           crearCarta(objetoJson[i]);
+          //boolean parar
         }
-
         jsonTerminado = true;
         if(jsonTerminado) {
           buscar.value = 'Buscar';
@@ -265,12 +312,21 @@ function mostrarCartaDorada(e) {
 
 function comprobrarBotonBuscar() {
   var nombreCarta = document.getElementById('buscarNombreCarta');
+  
   if(nombreCarta.value != '') {
     buscarPorNombreCarta();
   }
   else {
-    mostrarErrorTextoVacio();
+    nombreCarta.style.borderColor = 'rgb(200,25,25)';
+    nombreCarta.value = 'Introduce un nombre de carta';
+    nombreCarta.style.color = 'rgb(200,25,25)';
+    setTimeout(quitarRojo, 1500);
   }
+}
+
+function quitarRojo() {
+  nombreCarta.style.borderColor = 'black';
+  nombreCarta.value = '';
 }
 
 function buscarPorNombreCarta() {
@@ -307,6 +363,10 @@ function buscarPorNombreCarta() {
         if(jsonTerminado) {
           buscar.value = 'Buscar';
         }
+      }
+      else if(peticionHttp.status == 404) {
+        alert('carta no encontrada');
+        buscar.value = 'Buscar';
       }
     }
   }
@@ -346,11 +406,9 @@ window.onload = function() {
   nombreCarta = document.getElementById('buscarNombreCarta');
   nombreCarta.addEventListener("keydown", function(e) {
     if (!e) { var e = window.event; }
-    //e.preventDefault(); // sometimes useful
-
     // Enter is pressed
     if (e.keyCode == 13) { comprobrarBotonBuscar(); }
-});
+  });
 
 
   // Botón de buscar
