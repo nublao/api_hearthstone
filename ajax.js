@@ -110,6 +110,7 @@ function crearCarta(objeto) {
   var tipo = document.createElement('div');
   var tipoConcreto = document.createElement('span');
   var descripcion = document.createElement('div');
+  var expansion = document.createElement('div');
 
   // Comprobar la rareza de la carta y asignamos colores
   if(objeto.rarity != undefined) {
@@ -195,6 +196,11 @@ function crearCarta(objeto) {
     ataqueVida.className = 'textoGeneral';
   }
 
+  // TODO Expansión
+
+  expansion.innerHTML = 'Expansión: ' + objeto.cardSet;
+  expansion.className = 'textoGeneral';
+
   // Orden de aparición
   textoCarta.appendChild(nombre);
   textoCarta.appendChild(descripcion);
@@ -203,6 +209,7 @@ function crearCarta(objeto) {
   textoCarta.appendChild(coste);
   rareza.appendChild(rarezaConcreta);
   textoCarta.appendChild(rareza);
+  textoCarta.appendChild(expansion);
   textoCarta.appendChild(ataqueVida);
   textoCarta.appendChild(flavor);
   
