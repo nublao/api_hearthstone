@@ -95,6 +95,11 @@ li a {
     border: solid 1px;
 }
 
+ .transicionErrorTextoVacio {
+    transition: border-color .3s;
+    border-color: red;
+}
+
 /* Iconos de clase */
 
 #contenedorClases {
@@ -180,7 +185,7 @@ li a {
 }
 
 #buscarNombreCarta {
-    border: solid 1px black;
+    border: solid 3px black;
     margin: 5px;
     padding: 7px;
     width: 250px;
@@ -188,6 +193,9 @@ li a {
     background-color: rgba(203, 205, 207, 0.98);
 }
 
+#buscarNombreCarta:active {
+    border: solid 3px black;
+}
 .listaDesplegable {
     padding: 3px;
 }
@@ -265,7 +273,7 @@ li a {
 .textoCarta {
     width: 55%;
     background-color: rgba(255, 255, 255, 0.15);
-    margin-top: 100px;
+    margin-top: 75px;
     margin-right: 25px;
     padding: 10px;
     font-size: 15px;

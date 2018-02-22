@@ -1,11 +1,5 @@
 // Variables de control de selección
 var URLbasica = 'https://omgvamp-hearthstone-v1.p.mashape.com/cards?locale=esES';
-var clase = '';
-var expansion = '';
-var rareza = '';
-var habilidad = '';
-var raza = '';
-var modo = '';
 
 // Otras variables
 var jsonTerminado = false;
@@ -62,7 +56,6 @@ function quitarCartasAntesDeMostrar() {
     cartas.removeChild(cartas.firstChild);
   }
 }
-
 
 function buscarPorCoste(id) {
   if(id == 'allCostes' || id == undefined) {
@@ -246,8 +239,8 @@ function onClickClases() {
         // Recorremos primer nivel del json
         for (i in objetoJson) {
           crearCarta(objetoJson[i]);
+          //boolean parar
         }
-
         jsonTerminado = true;
         if(jsonTerminado) {
           buscar.value = 'Buscar';
@@ -271,12 +264,21 @@ function mostrarCartaDorada(e) {
 
 function comprobrarBotonBuscar() {
   var nombreCarta = document.getElementById('buscarNombreCarta');
+  
   if(nombreCarta.value != '') {
     buscarPorNombreCarta();
   }
   else {
-    mostrarErrorTextoVacio();
+    nombreCarta.style.borderColor = 'rgb(200,25,25)';
+    nombreCarta.value = 'Introduce un nombre de carta';
+    nombreCarta.style.color = 'rgb(200,25,25)';
+    setTimeout(quitarRojo, 1500);
   }
+}
+
+function quitarRojo() {
+  nombreCarta.style.borderColor = 'black';
+  nombreCarta.value = '';
 }
 
 function buscarPorNombreCarta() {
@@ -313,6 +315,10 @@ function buscarPorNombreCarta() {
         if(jsonTerminado) {
           buscar.value = 'Buscar';
         }
+      }
+      else if(peticionHttp.status == 404) {
+        alert('carta no encontrada');
+        buscar.value = 'Buscar';
       }
     }
   }
