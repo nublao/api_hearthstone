@@ -73,6 +73,10 @@ function buscarPorCoste(id) {
   }
 }
 
+function imagenInvalida(imagen) {
+  imagen.src = 'imagenes/404.png';
+}
+
 function crearCarta(objeto) {
   // Creamos los div para las imágenes de las cartas
   var imagen = document.createElement('img');
@@ -83,12 +87,14 @@ function crearCarta(objeto) {
   // Creamos la imagen de la carta y su versión doradas
   carta.className = 'gridCarta';
   imagen.className = 'imagenCarta';
-  if(objeto.img != undefined || objeto.img != null) {
+  imagen.onerror = function() {imagenInvalida(imagen)};
+  if(objeto.img != undefined) {
     imagen.src = objeto.img;
   }
   else {
     imagen.src = 'imagenes/404.png';
   }
+  //imagen.alt = 'imagenes/404.png';
   imagen.onmousemove = function() {
     mostrarCartaDorada(imagen.id);
   }
@@ -346,11 +352,9 @@ window.onload = function() {
   nombreCarta = document.getElementById('buscarNombreCarta');
   nombreCarta.addEventListener("keydown", function(e) {
     if (!e) { var e = window.event; }
-    //e.preventDefault(); // sometimes useful
-
     // Enter is pressed
     if (e.keyCode == 13) { comprobrarBotonBuscar(); }
-});
+  });
 
 
   // Botón de buscar
