@@ -198,8 +198,49 @@ function crearCarta(objeto) {
 
   // TODO Expansión
 
-  expansion.innerHTML = 'Expansión: ' + objeto.cardSet;
+  expansion.innerHTML = 'Expansión: ';
   expansion.className = 'textoGeneral';
+  switch(objeto.cardSet) {
+    case 'Basic':
+    expansion.innerHTML += 'Básico';
+    break;
+    case 'Classic':
+    expansion.innerHTML += 'Clásico';
+    break;
+    case 'Whispers of the Old Gods':
+    expansion.innerHTML += 'Dioses Antiguos';
+    break;
+    case 'One Night in Karazhan':
+    expansion.innerHTML += 'Karazhan';
+    break;
+    case 'Mean Streets of Gadgetzan':
+    expansion.innerHTML += 'Gadgetzan';
+    break;
+    case "Journey to Un'Goro":
+    expansion.innerHTML += "Un'Goro";
+    break;
+    case 'Knights of the Frozen Throne':
+    expansion.innerHTML += 'Trono Helado';
+    break;
+    case 'Kobolds & Catacombs':
+    expansion.innerHTML += 'Kóbolds y Catacumbas';
+    break;
+    case 'Naxxramas':
+    expansion.innerHTML += 'Naxxramas';
+    break;
+    case 'Goblins vs Gnomes':
+    expansion.innerHTML += 'Goblins contra Gnomos';
+    break;
+    case 'Blackrock Mountain':
+    expansion.innerHTML += 'Montaña Roca Negra';
+    break;
+    case 'The Grand Tournament':
+    expansion.innerHTML += 'El Gran Torneo';
+    break;
+    case 'The League of Explorers':
+    expansion.innerHTML += 'Liga de Expedicionarios';
+    break;
+  }
 
   // Orden de aparición
   textoCarta.appendChild(nombre);
